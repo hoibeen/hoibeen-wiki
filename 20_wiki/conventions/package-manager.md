@@ -1,0 +1,63 @@
+---
+id: convention-package-manager
+title: 패키지 매니저
+aliases: [패키지 매니저]
+type: convention
+status: active
+created_at: 2026-10-19
+created_by: 정회석
+updated_at: 2026-10-19
+updated_by: 정회석
+audit_log:
+  - action: created
+    at: 2026-10-19
+    by: 정회석
+    note: "hoibeen 위키 신설"
+tags: [common, convention, package-manager, pnpm]
+stack: common
+scope: package-manager
+source:
+  - "hoibeen 위키 신설, 2026-10-19"
+relations: []
+---
+# 패키지 매니저
+
+## 한 줄 요약
+
+hoibeen JS/TS 프로젝트의 기본 패키지 매니저는 **pnpm**입니다. 신규 프로젝트는 호환되는 안정 버전을 고정하고, 기존 프로젝트는 채택한 매니저와 lockfile을 우선합니다.
+
+## 기준
+
+- 설치·추가·스크립트 실행 예시는 pnpm을 기본으로 씁니다.
+- 신규 프로젝트는 도입 시점의 안정 버전과 Node·프레임워크 호환성을 확인한 뒤 `package.json`의 `packageManager`에 정확한 버전을 남깁니다. 매 실행마다 최신 버전으로 바꾸지 않습니다.
+- pnpm을 채택한 프로젝트는 `pnpm-lock.yaml`을 커밋합니다. 다른 매니저의 lockfile을 함께 만들지 않습니다.
+- 기존 `package-lock.json`·`yarn.lock`은 전환 요청 없이 삭제·변환하지 않습니다.
+- 프레임워크가 호환 버전을 선택하는 설치 명령을 제공하면 그 절차를 사용하되, 프로젝트의 패키지 매니저를 유지합니다.
+
+## 에이전트 적용
+
+1. `AGENTS.md`·`packageManager`·lockfile·실제 설치 환경부터 확인합니다.
+2. pnpm 사용을 요청받았거나 프로젝트가 이미 채택했다면 재확인 없이 사용합니다.
+3. npm·yarn으로 전환이 필요한데 요청·프로젝트 규칙이 없다면 이유와 선택지를 제시합니다. 이미 명시된 매니저를 다시 확인하지 않습니다.
+4. 매니저 변경·버전 업그레이드·lockfile 재생성은 실제 변경 범위로 다루고 검증 결과를 worklog에 남깁니다.
+
+## 명령 대응표
+
+| 용도 | pnpm |
+|---|---|
+| 의존성 설치 | `pnpm install` |
+| 패키지 추가 | `pnpm add <pkg>` |
+| 개발 의존성 추가 | `pnpm add -D <pkg>` |
+| 패키지 제거 | `pnpm remove <pkg>` |
+| 스크립트 실행 | `pnpm run <script>` |
+| 일회성 실행 | `pnpm dlx <pkg>` |
+
+## 관련 문서
+
+- [[node-version]]
+- [[agent-instruction-guide]]
+
+## 출처
+
+- hoibeen 위키 신설, pnpm 기본값 채택, 2026-10-19.
+- [pnpm 설치·호환 안내](https://pnpm.io/installation). 정확한 버전은 설치 시 조회.
